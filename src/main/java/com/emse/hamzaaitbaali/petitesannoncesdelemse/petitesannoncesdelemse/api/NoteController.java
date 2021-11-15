@@ -42,14 +42,7 @@ public class NoteController {
     public NoteDto create(@RequestBody NoteDto dto){
         User user = userDao.getUserByEmail(dto.getUser().getEmail());
         Note note = null;
-        // On creation id is not defined
-        //if (dto.getId() == null) {
         note = noteDao.save(new Note(dto.getDateofPost(), dto.getContentOfTheNote() , dto.getType(), user));
-        /*}
-        else {
-            note = noteDao.getById(dto.getId());  // For an update you don’t need to call the DAO save method. Method getOne load the persisted data and all changes on this object (attached to a persistent context) will be updated when the transaction will be commited.
-            note.setContentOfTheNote(dto.getContentOfTheNote());
-        }*/
         return new NoteDto(note);
     }
 
